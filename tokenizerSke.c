@@ -33,10 +33,10 @@ bool non_delim_character(char c, char delim)
 char *word_start(char* str,char delim)
 {
    int i =0;
-   char* p = NULL;
+   char* p = str;
 
    //while string not empty
-   while(str[i] != '\0'){
+   while(*p != '\0'){
 
       //if char next to it is a non delim char
       if (non_delim_character(str[i+1], delim)){
@@ -95,9 +95,15 @@ int count_tokens(char* str,char delim)
 
 /* Returns a freshly allocated new zero-terminated string
    containing <len> chars from <inStr> */
-char *copy_str(char *inStr, short len, char delim)
+char *copy_str(char *inStr, short len)
 {
+   char* s =(char*)malloc(len +1);
+   for (int i =0; i < len;i++){
+      s[i] = inStr[i];
+   }
+   s[len] = 0;
 
+   return s;
 }
 
 /* Returns a freshly allocated zero-terminated vector of freshly allocated
@@ -111,10 +117,24 @@ char *copy_str(char *inStr, short len, char delim)
 */
 char** tokenize(char* str, char delim)
 {
+   int tokensL = count_tokens(str, delim);
+   char* start = word_start(str, delim);
+   char* end = word_end(start, delim);
 
+   Char** token = (char**)malloc(tokensL + 1) * sizeof(char*)
+
+   for (int i = 0; i < lenTokens;i++){
+
+   }
+   
+
+   start = word_start(end, delim);
+   end = word_end(start, delim);
 }
 
 void print_all_tokens(char** tokens)
 {
-
+   for(int i = 0; i < tokens.length; i++){
+      cout <<
+   }
 }
