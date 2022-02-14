@@ -59,22 +59,19 @@ char *word_start(char* str,char delim)
 char *end_word(char* str,char delim)
 {
    int i = 0;
-   char* p = NULL;
+   str = word_start(str, delim);
    //while not the end of string
    while(str[i] != '\0'){
       //if char next to it is a delim char
       if(delim_character(str[i+1],delim)){
-
-         //equals word before delim char
-         p = &str[i];
-
-         //stop loop
+         
+         str = &str[i+1];
          break;
       }
       //increment i
       i++;
    }
-   return p;
+   return str;
 }
 
 /* Counts the number of words or tokens*/
@@ -88,6 +85,7 @@ int count_tokens(char* str,char delim)
       if (delim_character(str[i], delim)){
          c += 1;
       }
+      i++;
    }
    //subtracts 1 due to it not counting the '\0' at the end of the word
    return c-1;
@@ -119,22 +117,34 @@ char** tokenize(char* str, char delim)
 {
    int tokensL = count_tokens(str, delim);
    char* start = word_start(str, delim);
-   char* end = word_end(start, delim);
+   char* end = end_word(start, delim);
 
-   Char** token = (char**)malloc(tokensL + 1) * sizeof(char*)
+   char** token = (char**)malloc((tokensL + 1) * (sizeof(char*)));
 
-   for (int i = 0; i < lenTokens;i++){
-
+   for (int i = 0; i < tokensL;i++){
+      token[i] = copy_str(str, delim);
    }
-   
 
    start = word_start(end, delim);
-   end = word_end(start, delim);
+   end = end_word(start, delim);
 }
 
 void print_all_tokens(char** tokens)
 {
-   for(int i = 0; i < tokens.length; i++){
-      cout <<
-   }
+   
 }
+
+int main(){
+
+   char* c = "Hello How Are You";
+   char* e = ",,,hello,,,";
+   char b = ',';
+   char x = ' ';
+
+   
+   //printf(word_start(e, b));
+   printf(end_word(c, x));
+   printf(count_tokens(c, x));
+
+}
+
